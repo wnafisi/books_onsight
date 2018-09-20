@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
 //api call imports
-import { saveRating } from './services/ratingsApi';
+import { saveRating } from '../services/ratingsApi';
 
-
-class OneBookAddReview extends Component {
+class AddNewReview extends Component {
     constructor(props){
         super(props)
         this.state={
-            book_id: '',
-            user_id: '',
+            book_id: this.props.book_id,
+            user_id: this.props.nameToUserId(),
             comment: '',
-            rating: ''
+            rating: '',
+            isReviewSubmitted: false
         }
+        this.handleSubmit=this.handleSubmit.bind(this);
+        this.handleChange=this.handleChange.bind(this);
+        this.handleRating=this.handleRating.bind(this);
+        
     }
 
-    handleSubmit(){
+    handleSubmit() {
         const jwt = localStorage.getItem("jwt")
-        // saveRating(this.props.oneBook.id, user_id, this.state.rating, this.state.comment, jwt)
+        saveRating(this.state.book_id, this.state.user_id, this.state.rating, this.state.comment, jwt) 
+        .then(()=> this.setState({isReviewSubmitted: true}))    
     }
 
     handleChange(e) {
@@ -58,12 +63,29 @@ class OneBookAddReview extends Component {
         }
     }
 
-    //toggles add review form based on add-review-button
+    //toggles add-review-form based on add-review-button
     showAddReview(){
-        if(this.props.isOneBookAddReview === true) {
+        if(this.props.isAddReview === true && this.state.isReviewSubmitted === false) {
             return(
-                <div className="OneBookAddReviewContainer">
-                    <p>Rate and review {this.props.oneBook.title}</p>
+                <div className="addBookForm2">
+                    
+                    <div className="OneBookAddReviewTitleButtons">
+                        <div className="OneBookAddReviewTitle">
+                            <p>Rate and review {this.props.title}</p>
+                        </div>
+                        
+                        <div className="OneBookAddReviewButtons">
+                            <div 
+                                className="addReviewButton" 
+                                onClick={()=>this.handleSubmit()}>
+                                submit review
+                            </div>
+                            <div className="addReviewButton">
+                                nevermind
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div className="OneBookAddReviewComment">
                         <label>Review:</label>
                         <br></br><br></br>
@@ -77,8 +99,8 @@ class OneBookAddReview extends Component {
                         </textarea>
                         <br></br><br></br><br></br>
                     </div>
+                    
                     <div className="OneBookAddReviewStars"> 
-                        <div className="bigStar"> 
                             <label>Rating:</label>
                             <br></br><br></br> 
                             <div className="star1">                              
@@ -96,8 +118,14 @@ class OneBookAddReview extends Component {
                             <div className="star5">
                                 <i className="fas fa-star" onClick={()=>this.handleRating(5)}></i>
                             </div> 
-                        </div>
-                    </div> 
+                    </div>
+                    
+                </div>
+            )
+        } else if (this.props.isAddReview === true){
+            return(
+                <div className="addBookForm2">
+                    Your review has been submitted.
                 </div>
             )
         }
@@ -113,4 +141,4 @@ class OneBookAddReview extends Component {
 
 }
 
-export default OneBookAddReview;
+export default AddNewReview;

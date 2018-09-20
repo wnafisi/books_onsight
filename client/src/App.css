@@ -30,8 +30,8 @@
 .container-display{
   background: url('/good.png');
   background-size: 100%;
-  min-height: 600px;
-  padding: 150px 0 0 40px;
+  min-height: 740px;
+  padding: 100px 0 0 40px;
   
 }
 
@@ -41,12 +41,26 @@
   display: flex;
   flex-direction: column;
 }
+.filterBar{
+  min-height:50px;
+  max-width: 1150px;
+  /* background-color: rgba(163, 214, 249, 0.913); */
+  background: linear-gradient(to right, rgba(163, 214, 249, 0.913), rgba(255, 192, 203, 0));
+  border: 4px inset rgba(163, 214, 249, 0.913);
+  display: flex;
+  flex-direction: row;
+}
+
+.filterBaby{
+flex: 1;
+}
 .title{
   max-height: 50px;
 }
 .info{
   display: flex;
   flex-direction: row;
+  min-height: 700px;
 }
 .bbyListBooks {
   flex: 2;
@@ -71,6 +85,11 @@
 }
 
 /* display box for one book-review-checkout/user/author/ */
+/* .containsThreePages{
+  background-color: red;
+  max-width: 750px;
+  max-height: 700px;
+} */
 .oneBookContainer{
   display: flex;
   flex-direction: column;
@@ -101,7 +120,7 @@
   border: none;
   cursor: pointer;
   max-width: 150px;
-  margin: 5px;
+  margin: 0px 15px 15px 0px;
 }
 .oneBookReviewCheckout:hover, .oneBookReviewCheckout:focus {
   background-color: #2980B9;
@@ -109,20 +128,26 @@
 
 /* oneBook Add review form */
 .OneBookAddReviewContainer{
-  z-index: 2;
-  background-color: rgb(184, 255, 255);
-  display: flex;
+  padding: 10px;
+  background-color: rgb(221, 210, 255);
   flex-direction: column;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  
+  min-width: 670px;
+  min-height: 550px;
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  margin: 20px 0 0 25px;
 }
 .oneBookAddReviewComment{
-  flex: 1
+  min-height: 300px;
+  flex: 4;
 }
-.bigStar{
+.OneBookAddReviewStars{
   display: flex;
   flex-direction: row;
   max-width: 100px;
+  flex: 1;
   }
 .star1 {flex: 1; margin: 0 0 0 7px; }
 .star2 {flex: 1; margin: 0 0 0 7px; }
@@ -130,13 +155,238 @@
 .star4 {flex: 1; margin: 0 0 0 7px; }
 .star5 {flex: 1; margin: 0 0 0 7px; }
 
+.OneBookAddReviewTitleButtons{
+  display: flex;
+  flex-direction: row;
+}
+.OneBookAddReviewTitle{
+  flex: 3;
+}
+.OneBookAddReviewButtons{
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  max-height: 100px;
+  flex: 1;
+  margin: 0 0 0 470px;
+  position: absolute;
+}
+.OneBookAddReviewButtonsFrom{
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  max-height: 100px;
+  flex: 1;
+  margin: 0 0 0 600px;
+  position: absolute;
+}
+.addReviewButton{
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  flex: 1;
+  margin: 6px;
+}
+.addReviewButton:hover, .addReviewButton:focus {
+  background-color: #2980B9;
+}
 
+/* ADD BOOK FORM */
+.addBookFormContainer{
+  display: flex;
+  flex-direction: row;
+}
+.addBookForm{
+  flex: 1;
+  max-width: 400px;
+  max-height: 500px;
+  background-color: rgba(254, 217, 168, 0.242);
+  border: 6px inset #3498DB;
+  margin: 60px 0 0 50px;
+  padding: 25px 0 25px 25px;
+}
+.addBookForm2{
+  margin: 60px 0 0 100px;
+  flex: 1;
+  padding: 10px;
+  background-color: rgb(221, 210, 255);
+  flex-direction: column;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  min-width: 550px;
+  min-height: 500px;
+  display: flex;
+  z-index: 1;
+}
+.newBookButtonContainer{
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  max-width: 200px;
+}
+.newBookButton{
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  flex: 1;
+  margin: 6px;
+}
+.newBookButton:hover, .newBookButton:focus {
+  background-color: #2980B9;
+}
+
+/* DROP DOWN FOR FILTER BY STARS */
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  /* position: relative; */
+  display: inline-block;
+}
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {background-color: #ddd}
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+/* DROP DOWN FOR LOANS AND WEEKS //////////////////////////////////*/
+.dropdown-contentForLoan {
+  /* display: none; */
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-contentForLoan a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-contentForLoan a:hover {background-color: #ddd}
+.dropbtnForLoan{
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.dropbtnForLoan:hover, .dropbtnForLoan:focus {
+  background-color: #2980B9;
+}
+.showForLoan {display:block;}
+
+
+
+
+
+
+
+/*SPLASH PAGE + LOGIN STUFF*/
+.welcomeContainer{
+  display: flex;
+  flex-direction: row;
+  padding: 0 0 0 0px;
+}
+.welcomeText{
+  flex: 1;
+  font-size: 2.6rem;
+  content: center;
+  max-width: 300px;
+  margin: 100px 100px 100px 250px;
+}
+.welcomeTextSide{
+  flex: 1;
+  content: center;
+  font-size: 2rem;
+  max-width: 300px;
+  margin: 70px 300px 50px 50px;
+}
+.frontPageButtonsContainer{
+  display: flex;
+  flex-direction: row;
+}
+.frontPageButtons{
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 110px;
+  margin: 10px;
+}
+.frontPageButtons:hover, .frontPageButtons:focus {
+  background-color: #2980B9;
+}
+.logoutButton{
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  max-width: 70px;
+  margin: 20px 0 0 0;
+}
+.logoutButton:hover, .logoutButton:focus {
+  background-color: #2980B9;
+}
+.loginStart{
+  background-image: linear-gradient(rgba(52, 152, 219, 0.509), #f06b0600);
+  min-height: 100%;
+  display: inline-block;
+  padding: 15px;  
+  flex: 1;
+  right: 0px;
+  width: 200px;
+}
 
 
 
 
 
 /* buttons *//* buttons *//* buttons *//* buttons */
+.dropbtnAuthor {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 110px;
+  height: 20px;
+}
+.dropbtnAuthor:hover, .dropbtnAuthor:focus {
+  background-color: #2980B9;
+}
 
 .loginButton{
   background-color: #3498DB;

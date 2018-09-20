@@ -9,30 +9,13 @@ class Login extends Component {
         }
         this.handleChange=this.handleChange.bind(this);
         this.login=this.login.bind(this);
-        //drop-down to login/ register
-        // window.onclick = function(event) {
-        // if ( !event.target.matches('.dropbtn')) {
-        //     let dropdowns = document.getElementsByClassName("dropdown-content");
-        //     let i;
-        //     for (i = 0; i < dropdowns.length; i++) {
-        //         let openDropdown = dropdowns[i];
-        //         if (openDropdown.classList.contains('show')) {
-        //         openDropdown.classList.remove('show');
-        //         }
-        //     }
-        // }
-        // } 
     }
-
     handleChange(e) {
         this.setState({
           [e.target.name]: e.target.value
         })
       }
-
-    
-
-    //login stuff
+    //login api call, set state and local storage with jwt token
     login() {
         const BASE_URL = process.env.REACT_APP_API_URL;
         const url = `${BASE_URL}/user_token`;
@@ -49,7 +32,14 @@ class Login extends Component {
         .then(() => this.props.setUserEmail(this.state.email))
         .catch(err => console.log(err))
     }
-
+    logOut() {
+        this.props.switchIsloggedIn();
+        localStorage.removeItem("jwt");
+        this.setState({
+          name: '',
+          email: ''
+        });
+    }
     showLogin() {
         if (this.props.isLoggedIn === false) {
             return(
@@ -81,37 +71,23 @@ class Login extends Component {
             )
         } else {
             return(
-                <div>
+                <div className="loginStart">
                     Logged in as {this.props.email}
+                    <div 
+                        onClick={()=>this.logOut()}
+                        className="logoutButton">
+                        log out
+                    </div>
                 </div>
             )
         }
     }
-
-    //leading to register page or not
-    showRegisterButton(){
-        if (this.props.isLoggedIn === false) {
-            return(
-                <div 
-                    className="showRegisterFormButton"
-                    onClick={()=>this.props.switchCurrentViewToRegister()}
-                >
-                    Sign up!
-                </div>
-
-            )
-        }
-    }
-
     render() {
         return(
             <div>
                 {this.showLogin()}
-                {this.showRegisterButton()}
             </div>
         )
     }
-
 }
-
 export default Login;

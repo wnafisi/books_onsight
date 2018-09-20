@@ -4,7 +4,7 @@ function OneBookReview(props) {
 
     //if reviews are empty, returns an empty message
     function isReviewEmpty() {
-        if (props.ratingsForBook.length > 1) {
+        if (props.ratingsForBook.length >= 1) {
             return(
                 <div className="oneBookContainer">
                     <p className="oneBookUnderTitle">

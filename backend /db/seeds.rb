@@ -11,7 +11,8 @@
 User.create!([
     {email: 'admin@bananas.com', password: 'bananaKing', password_confirmation: 'bananaKing'},
     {email: 'user@bananas.com', password: 'bananaBro', password_confirmation: 'bananaBro'},
-    {email: 'waseemnafisi@gmail.com', password: 'love', password_confirmation: 'love'}
+    {email: 'waseemnafisi@gmail.com', password: 'love', password_confirmation: 'love'},
+    {email: 'jhmayfield00@gmail.com', password: 'love', password_confirmation: 'love'}
 ])
 
 Author.create!([
@@ -37,7 +38,8 @@ Author.create!([
     {first_name: 'Jacques', last_name: 'Ranciere'},
     {first_name: 'Joseph A.', last_name: 'Massad'},
     {first_name: 'Oscar', last_name: 'Wilde'},
-    {first_name: 'George', last_name: 'Orwell'}
+    {first_name: 'George', last_name: 'Orwell'},
+    {first_name: 'Henry', last_name: 'Adams'}
 ])
 
 Book.create!([
@@ -64,7 +66,8 @@ Book.create!([
     {title: "Passwords", publication_year: 2011, author_id: 4},
     {title: "Desiring Arabs", publication_year: 2007, author_id: 21},
     {title: "The Picture of Dorian Gray", publication_year: 1890, author_id: 22},
-    {title: "Animal Farm", publication_year: 1945, author_id: 23}
+    {title: "Animal Farm", publication_year: 1945, author_id: 23},
+    {title: "The Education of Henry Adams", publication_year: 1907, author_id: 24}
 ])
 
 
@@ -78,9 +81,9 @@ Rating.create!([
 
 Loan.create!([
     {book_id: 1, user_id: 2, weeks: 5},
-    {book_id: 4, user_id: 2, weeks: 5},
+    {book_id: 4, user_id: 2, weeks: 4},
     {book_id: 3, user_id: 1, weeks: 3},
-    {book_id: 2, user_id: 1, weeks: 3},
+    {book_id: 2, user_id: 1, weeks: 2},
     {book_id: 5, user_id: 3, weeks: 4}
 ])
 

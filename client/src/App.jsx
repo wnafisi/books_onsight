@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 //component imports
-import AddBook from './AddBook';
-import MyProfile from './MyProfile';
-import OurLibrary from './OurLibrary';
+import AddBook from './underAddBook/AddBook';
+import SplashPage from './SplashPage';
+import OurLibrary from './underLibrary/OurLibrary';
 import Register from './Register';
 import Users from './Users';
-import BooksonSight from './BooksonSight';
-
+import MyLibrary from './MyLibrary';
 //api-fetch imports
 import { fetchUsers } from './services/userApi'; 
 
@@ -16,7 +15,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state={
-      currentView: 'Register',
+      currentView: 'Books onSight',
       isLoggedIn: false,
       email: '',
       users: ''
@@ -26,19 +25,20 @@ class App extends Component {
     this.setUserEmail=this.setUserEmail.bind(this);
     this.callUsers=this.callUsers.bind(this);
     this.switchCurrentViewToRegister=this.switchCurrentViewToRegister.bind(this);
+    this.switchCurrentViewToLibrary=this.switchCurrentViewToLibrary.bind(this);
     this.userIdToName=this.userIdToName.bind(this);
+    this.nameToUserId=this.nameToUserId.bind(this);
   }
   componentDidMount(){
     fetchUsers()
       .then(data => this.setState({ users: data.message }))
   }
-
   //handling login
   switchIsloggedIn(){
     if (this.state.isLoggedIn === false) {
       this.setState({ isLoggedIn: true })
     } else {
-      this.setState({ isLoggedIn: false })
+      this.setState({ isLoggedIn: false, email: ''})
     }
   }
   setUserEmail(userEmail) {
@@ -52,37 +52,41 @@ class App extends Component {
   switchCurrentViewToRegister() {
     this.setState({ currentView: 'Register'})
   }
+  switchCurrentViewToLibrary() {
+    this.setState({ currentView: 'Collective Library'})
+  }
   //helper functions for key-object pair identification
   userIdToName(userId){
     const usersArr = this.state.users;
     const correctUser = usersArr.filter(user => (user.id === userId))
-    console.log(correctUser)
     return(correctUser[0].email)
   }
-  // bookIdToName(bookId){
-  //   const usersArr = this.state.users;
-  //   const correctUser = usersArr.filter(user => (user.id === userId))
-  //   console.log(correctUser)
-  //   return(correctUser[0].email)
-  // }
-
-
+  nameToUserId(){
+    if (this.state.email !== '') {
+      const usersArr = this.state.users;
+      const correctUser = usersArr.filter(user => (user.email === this.state.email))
+      console.log(correctUser)
+      return(correctUser[0].id)
+    }
+  }
   //this function is the navigation bar, will allow different components to render on same page
   determineWhichToRender() {
     const { currentView } = this.state;
-
     switch (currentView) {
       case 'Add a book':
         return <AddBook 
-                
+                userIdToName={this.userIdToName}
+                nameToUserId={this.nameToUserId}
+                switchCurrentViewToLibrary={this.switchCurrentViewToLibrary}
                 />;
-      case 'Our library':
+      case 'Collective Library':
         return <OurLibrary 
                   userIdToName={this.userIdToName}
+                  nameToUserId={this.nameToUserId}
                 />;
       case 'Users':
         return <Users
-
+                  users={this.state.users}
                 />;
       case 'Register':
         return <Register 
@@ -92,40 +96,48 @@ class App extends Component {
                   setUserEmail={this.setUserEmail}
                   isLoggedIn={this.state.isLoggedIn}
                 />;
-      case 'My profile':
-        return <MyProfile 
+      case 'Books onSight':
+        return <SplashPage 
                   email={this.state.email}
                   setUserEmail={this.setUserEmail}
                   isLoggedIn={this.state.isLoggedIn}
                   switchIsloggedIn={this.switchIsloggedIn}
                   switchCurrentViewToRegister={this.switchCurrentViewToRegister}
+                  switchCurrentViewToLibrary={this.switchCurrentViewToLibrary}
                 />;
-      case 'Books onSight':
-        return <BooksonSight 
-                         
+      case 'My library':
+        return <MyLibrary 
+                  userIdToName={this.userIdToName}
+                  nameToUserId={this.nameToUserId}
+                  switchCurrentViewToLibrary={this.switchCurrentViewToLibrary}
                 />;
       default:
     }
   }
-
   handleLinkClick(links) {
-    this.setState({ 
+    this.setState({
       currentView: links,
     })
   }
-
-
+  showMyLibrary(){
+    if (this.state.isLoggedIn === false) {
+      return [
+        'Collective Library',
+        'Add a book',
+        'Users',
+        'Books onSight'
+      ];
+    } else {
+      return [
+        'Collective Library',
+        'My library',
+        'Users',
+        'Books onSight'
+      ];
+    }
+  }
   render() {
-    const links = [
-      'Books onSight',
-      'Register',
-      'Our library',
-      'Add a book',
-      'Users',
-      'My profile'
-    ];
-
-
+    const links = this.showMyLibrary()
     return (
       <div className="container">
         <div className="container-nav">
@@ -145,11 +157,9 @@ class App extends Component {
           </div>
           <div className="container-display">
               {this.determineWhichToRender()}
-           
           </div>
       </div>
     );
   }
 }
-
 export default App;

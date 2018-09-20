@@ -1,5 +1,4 @@
 const BASE_URL = process.env.REACT_APP_API_URL;
-console.log(BASE_URL);
 
 export function fetchRatingForBook(id) {
     console.log("fetchRatingForBook", id)
@@ -7,14 +6,12 @@ export function fetchRatingForBook(id) {
     .then(resp=>resp.json())
 }
 
-
 export function fetchSpecificRating(ratingNum) {
     return fetch (BASE_URL + `/stars/${ratingNum}`)
     .then(resp=>resp.json())
 }
 
 export function saveRating(book_id, user_id, rating, comment, jwt) {
-    //console.log({"book_id": book_id, "user_id": user_id,"rating": rating, "comment": comment})
     const body = {"book_id": book_id, "user_id": user_id, "rating": rating, "comment": comment}
     const init = {
         headers: {"Authorization": `Bearer ${jwt}`,'Content-Type': 'application/json', 'Accept': 'application/json'},
