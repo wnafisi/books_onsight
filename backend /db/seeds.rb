@@ -70,6 +70,34 @@ Book.create!([
     {title: "The Education of Henry Adams", publication_year: 1907, author_id: 24}
 ])
 
+MyBook.create!([
+    {book_id: 1, user_id: 3},
+    {book_id: 2, user_id: 3},
+    {book_id: 3, user_id: 3},
+    {book_id: 4, user_id: 3},
+    {book_id: 5, user_id: 3},
+    {book_id: 6, user_id: 3},
+    {book_id: 7, user_id: 3},
+    {book_id: 8, user_id: 3},
+    {book_id: 9, user_id: 3},
+    {book_id: 10, user_id: 3},
+    {book_id: 11, user_id: 3},
+    {book_id: 12, user_id: 3},
+    {book_id: 13, user_id: 3},
+    {book_id: 14, user_id: 3},
+    {book_id: 15, user_id: 3},
+    {book_id: 16, user_id: 3},
+    {book_id: 17, user_id: 3},
+    {book_id: 18, user_id: 3},
+    {book_id: 19, user_id: 3},
+    {book_id: 20, user_id: 3},
+    {book_id: 21, user_id: 3},
+    {book_id: 22, user_id: 3},
+    {book_id: 23, user_id: 3},
+    {book_id: 24, user_id: 3},
+    {book_id: 25, user_id: 4}
+])
+
 
 Rating.create!([
     {book_id: 1, user_id: 2, rating: 5, comment: "year of impossible goodbyes was heart wrenching, very beautiful dark moments"},

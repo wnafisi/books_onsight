@@ -19,8 +19,8 @@ function OneBookReview(props) {
                                 >
                                         <br></br>
                                     <p>Review by {props.userIdToName(rating.user_id)}:</p>
-                                        <br></br>
                                     <p>{rating.comment}</p>
+                                        <br></br>
                                     <p>Stars:</p>
                                     <p>{rating.rating}</p>
                                         <br></br>

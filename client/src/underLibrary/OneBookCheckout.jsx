@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //api call imports
 import { saveLoan } from '../services/loansApi';
+import WeeksDropDown from './WeeksDropDown';
 
 class OneBookCheckout extends Component {
     constructor(props){
@@ -8,8 +9,9 @@ class OneBookCheckout extends Component {
         this.state={
             isWeeksDropdown: false
         }
+        this.toggleIsWeeks=this.toggleIsWeeks.bind(this);
+        this.createLoan=this.createLoan.bind(this);
     }
-  
     createLoan(weeks){
         if (this.props.nameToUserId()) {
             const newLoan = {"book_id": this.props.oneBook.id, 
@@ -17,18 +19,11 @@ class OneBookCheckout extends Component {
                                 "weeks": weeks}
             const jwt = localStorage.getItem("jwt")
             saveLoan(newLoan, jwt)
-            .then(()=>this.props.resetStateAfterAddedLoan(this.props.oneBook.id))
+            .then(()=> {
+                this.props.resetStateAfterAddedLoan(this.props.oneBook.id)
+                this.setState({isWeeksDropdown: false})
+            })
         }
-    }
-    //if loan record is empty, returns "avaible for checkout"
-    hideWeeks(){
-        window.onclick = function(event) {
-            // console.log('before if')
-            if (this.state.isWeeksDropdown === true && !event.target.matches('.dropdown-contentForLoan')) {
-                console.log('matches if')
-                this.showDropDown();
-            }
-        } 
     }
     showDropDown(){
         if(this.state.isWeeksDropdown === false) {
@@ -37,17 +32,21 @@ class OneBookCheckout extends Component {
             this.setState({isWeeksDropdown: false})
         }
     }
+    toggleIsWeeks(){
+        if(this.state.isWeeksDropdown===false){
+            this.setState({isWeeksDropdown: true})
+        } else {
+            this.setState({isWeeksDropdown: false})
+        }
+    }
     showWeeks(){
         if(this.state.isWeeksDropdown === true) {
             return(
-                <div 
-                    className="dropdown-contentForLoan">
-                    <a onClick={()=>this.createLoan(1)} >1 week</a>
-                    <a onClick={()=>this.createLoan(2)} >2 weeks</a>
-                    <a onClick={()=>this.createLoan(3)} >3 weeks</a>
-                    <a onClick={()=>this.createLoan(4)} >4 weeks</a>
-                    <a onClick={()=>this.createLoan(5)} >5 weeks</a>
-                </div>
+                <WeeksDropDown 
+                isWeeksDropdown={this.state.isWeeksDropdown}
+                toggleIsWeeks={this.toggleIsWeeks}
+                createLoan={this.createLoan}
+                />
             )
         }
     }
@@ -78,7 +77,7 @@ class OneBookCheckout extends Component {
             )
         } else {
             return(
-                <div className="oneBookContainer">
+                <div className="oneBookContainerForLoan">
                     <p className="oneBookUnderTitle">
                         {this.props.oneBook.title} is available for checkout</p>
                         <div className="dropdown">

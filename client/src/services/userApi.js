@@ -1,5 +1,4 @@
 const BASE_URL = process.env.REACT_APP_API_URL;
-console.log(BASE_URL);
 
 export function fetchUsers() {    
     return fetch(BASE_URL + '/users')

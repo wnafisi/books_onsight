@@ -7,6 +7,8 @@ import { fetchLoanForBookId } from '../services/loansApi';
 //component imports
 import OneBook from './OneBook';
 import FilterByRating from './FilterByRating';
+import OurLibraryAuthors from './OurLibraryAuthors';
+
 class OurLibrary extends Component {
     constructor(props){
         super(props)
@@ -14,15 +16,19 @@ class OurLibrary extends Component {
             books: '',
             oneBook: '',
             authors: '',
+            oneAuthor: '',
             ratingsForBook: '',
             loansForBook: '',
             isFilterByAuthors: false,
-            isFilterByStars: false
+            showIsFilterByStarsButton: true,
+            isFilterByStars: false,
+            showBackToMainBookListButton: false,
         }
         this.pickOneBook=this.pickOneBook.bind(this);
         this.resetRatingsForBook=this.resetRatingsForBook.bind(this);
         this.resetLoansForBook=this.resetLoansForBook.bind(this);
         this.filterByStars=this.filterByStars.bind(this);
+        this.pickOneAuthor=this.pickOneAuthor.bind(this);
     }
     //book api calls
     componentDidMount() {
@@ -40,6 +46,31 @@ class OurLibrary extends Component {
         fetchLoanForBookId(bookId)
             .then(data => this.setState({loansForBook: data.message}))
     }
+    pickOneAuthor(authorId){
+        this.setState({oneAuthor: authorId})
+    }
+    backToMainBookList(){
+        if(this.state.showIsFilterByStarsButton===true){
+            return(
+                <div className="filterBaby">
+                    <FilterByRating filterByStars={this.filterByStars}/>
+                </div>
+            )
+        } else if (this.state.showBackToMainBookListButton===true){
+            return(
+                <div className="filterBaby">
+                    <div 
+                        onClick={()=>this.setState({isFilterByAuthors: false, 
+                                                    oneAuthor: '',
+                                                    showBackToMainBookListButton:false,
+                                                    showIsFilterByStarsButton: true})}
+                        className="dropbtnForBackToMainBookList">
+                        Back to main book catalogue
+                    </div>
+                </div>
+            )
+        }
+    }
     //filter by rating, (re-renders oneBook component so it starts clean)
     filterByStars(starNumber){
         this.setState({ isFilterByStars: true, 
@@ -50,7 +81,6 @@ class OurLibrary extends Component {
     }
     showOneBookThroughStars(){
         if(this.state.isFilterByStars === true && this.state.isFilterByAuthors === false){
-            console.log("showOneBookThroughStars is on")
             return(
                 <div className="bbyOneBook">
                     <OneBook 
@@ -82,36 +112,39 @@ class OurLibrary extends Component {
         if (this.state.books !== '' && this.state.isFilterByAuthors === false) {
             return(
                 <div>
-                    {
-                    this.state.books.map(book=> {
-                        return(
-                            <div 
-                                className="oneBooke"
-                                onClick={()=>this.pickOneBook(book.id)}
-                                key={book.id}>
-                                {book.title}
+                    <div className="title">
+                        <h2>Book list:</h2>
+                    </div>
+                    <div className="info">
+                        <div className="bbyListBooks">
+                            <div>
+                                {
+                                this.state.books.map(book=> {
+                                    return(
+                                        <div 
+                                            className="oneBooke"
+                                            onClick={()=>this.pickOneBook(book.id)}
+                                            key={book.id}>
+                                            {book.title}
+                                        </div>
+                                    )
+                                    })
+                                }
                             </div>
-                        )
-                    })
-                    }
+                        </div>
+                            {this.showOneBook()}
+                            {this.showOneBookThroughStars()}
+                    </div>
                 </div>
             )
         } else if (this.state.authors !== '' && this.state.isFilterByAuthors === true) {
             return(
-                <div>
-                    {
-                    this.state.authors.map(author => {
-                        return(
-                            <div 
-                                className="oneBooke"
-                                // onClick={()=>this.pickOneBook(book.id)}
-                                key={author.id}>
-                                {author.first_name} {author.last_name}
-                            </div>
-                        )
-                    })
-                    }
-                </div>
+                <OurLibraryAuthors
+                    pickOneAuthor={this.pickOneAuthor}
+                    oneAuthor={this.state.oneAuthor}                            
+                    authors={this.state.authors} 
+                    books={this.state.books}
+                />
             )
         }
     }
@@ -140,10 +173,7 @@ class OurLibrary extends Component {
         return(
             <div className="columnContainer">
                 <div className="filterBar">
-                                       
-                    <div className="filterBaby">
-                        <FilterByRating filterByStars={this.filterByStars}/>
-                    </div>
+                    {this.backToMainBookList()}
                     <div className="filterBaby">
                         <div 
                         onClick={()=> { 
@@ -151,9 +181,17 @@ class OurLibrary extends Component {
                                 //books called incase filter was on when filterAuthors is called
                                 fetchBooks()
                                 .then(data => this.setState({books: data.message}))
-                                this.setState({isFilterByAuthors: true, isFilterByStars: false, oneBook: ''})
+                                this.setState({isFilterByAuthors: true, 
+                                                isFilterByStars: false,  
+                                                showBackToMainBookListButton: true,
+                                                showIsFilterByStarsButton: false,
+                                                oneBook: '', oneAuthor: ''})
                             } else {
-                                this.setState({isFilterByAuthors: false})
+                                this.setState({isFilterByAuthors: false,
+                                                showBackToMainBookListButton: false,
+                                                showIsFilterByStarsButton: true,
+                                                oneAuthor: '' 
+                                            })
                             }
                         }}
                         className="dropbtnAuthor">
@@ -161,22 +199,9 @@ class OurLibrary extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="title">
-                    <h2>Book list:</h2>
-                </div>
-                    <br></br>
-                <div className="info">
-                    <div className="bbyListBooks">
-                        {this.showList()}
-                    </div>
-                        {this.showOneBook()}
-                        {this.showOneBookThroughStars()}
-                </div>
-
-            </div>
-            
+                {this.showList()}
+            </div>  
         )
     }
 }
-
 export default OurLibrary;

@@ -7,6 +7,7 @@ import { saveAuthor } from '../services/authorsApi';
 import { saveBook } from '../services/booksApi';
 import { fetchAuthors } from '../services/authorsApi';
 import { fetchBooks } from '../services/booksApi';
+import { saveMyBook } from '../services/myBooksApi';
 
 class AddBook extends Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class AddBook extends Component {
         }
         this.handleChange=this.handleChange.bind(this);
         this.authorSetOff=this.authorSetOff.bind(this);
+        this.toggleAddReview=this.toggleAddReview.bind(this);
     }
     handleChange(e) {
         const { name, value } = e.target;
@@ -52,12 +54,20 @@ class AddBook extends Component {
                     this.setState({book_id: newBookId})
                     this.setState({isNewBook: true})
                 })
+                .then(() => saveMyBook({"book_id": this.state.book_id, "user_id": this.props.nameToUserId()}, jwt))
+                .then(()=>this.props.resetMyBooks());
             })
         } else {
             this.setState({isNotLoggedIn: true})
         }
     }
-
+    toggleAddReview(){
+        if (this.state.isAddReview === false) {
+            this.setState({isAddReview: true})
+        } else {
+            this.setState({isAddReview: false})
+        }
+    }
     showAddBook(){
         if (this.state.isNewBook === false){
             return(
@@ -95,13 +105,7 @@ class AddBook extends Component {
                             <br></br>
                             <div className="newBookButtonContainer">
                                 <div 
-                                    onClick={()=>{ 
-                                        if (this.state.isAddReview === false) {
-                                            this.setState({isAddReview: true})
-                                        } else {
-                                            this.setState({isAddReview: false})
-                                        }
-                                    }}
+                                    onClick={()=>this.toggleAddReview()}
                                     className="newBookButton">
                                     add your review of this book
                                 </div>
@@ -127,12 +131,12 @@ class AddBook extends Component {
                             title={this.state.title}
                             nameToUserId={this.props.nameToUserId}
                             book_id={this.state.book_id}
+                            toggleAddReview={this.toggleAddReview}
                         />
                 </div>
             )
         }
     }
-
     showNotloggedIn(){
         if(this.state.isNotLoggedIn === true) {
             return(

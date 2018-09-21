@@ -80,7 +80,9 @@ class AddNewReview extends Component {
                                 onClick={()=>this.handleSubmit()}>
                                 submit review
                             </div>
-                            <div className="addReviewButton">
+                            <div 
+                                onClick={()=>this.props.toggleAddReview()}
+                                className="addReviewButton">
                                 nevermind
                             </div>
                         </div>

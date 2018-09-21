@@ -18,5 +18,5 @@ Rails.application.routes.draw do
 
   resources :userratings
 
-
+  resources :my_books
 end

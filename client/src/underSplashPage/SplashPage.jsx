@@ -1,4 +1,5 @@
 import React from 'react';
+//component imports
 import Login from './Login';
 
 function MyProfile(props) {

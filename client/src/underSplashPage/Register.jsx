@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { registerUser } from './services/userApi';
+//api call imports
+import { registerUser } from '../services/userApi';
 
 
 class Register extends Component{
@@ -45,7 +46,7 @@ class Register extends Component{
     hideRegisterOnceLoggedIn(){
         if(this.props.isLoggedIn === false){
             return (
-                <div className="registerForm">
+                <div className="addBookForm">
                     <form>
                         <label htmlFor="email">Email: </label>
                         <br />
@@ -81,14 +82,9 @@ class Register extends Component{
             )
         }
     }
-
     render() {
         return(
-            <div>
-                <p>register page</p>
-                <br></br>
-                {this.hideRegisterOnceLoggedIn()}
-            </div>
+            this.hideRegisterOnceLoggedIn()
         )
     }
 }

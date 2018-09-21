@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 //component imports
 import AddBook from './underAddBook/AddBook';
-import SplashPage from './SplashPage';
+import SplashPage from './underSplashPage/SplashPage';
+import Register from './underSplashPage/Register';
 import OurLibrary from './underLibrary/OurLibrary';
-import Register from './Register';
-import Users from './Users';
-import MyLibrary from './MyLibrary';
+import Users from './underUsers/Users';
+import MyLibrary from './underMyLibrary/MyLibrary';
 //api-fetch imports
 import { fetchUsers } from './services/userApi'; 
-
 
 class App extends Component {
   constructor(props) {
@@ -38,7 +37,7 @@ class App extends Component {
     if (this.state.isLoggedIn === false) {
       this.setState({ isLoggedIn: true })
     } else {
-      this.setState({ isLoggedIn: false, email: ''})
+      this.setState({ isLoggedIn: false, email: '', currentView: 'Books onSight' })
     }
   }
   setUserEmail(userEmail) {
@@ -86,6 +85,7 @@ class App extends Component {
                 />;
       case 'Users':
         return <Users
+                  userIdToName={this.userIdToName}
                   users={this.state.users}
                 />;
       case 'Register':
@@ -107,6 +107,11 @@ class App extends Component {
                 />;
       case 'My library':
         return <MyLibrary 
+                  email={this.state.email}
+                  setUserEmail={this.setUserEmail}
+                  isLoggedIn={this.state.isLoggedIn}
+                  switchIsloggedIn={this.switchIsloggedIn}
+                  nameToUserId={this.nameToUserId}
                   userIdToName={this.userIdToName}
                   nameToUserId={this.nameToUserId}
                   switchCurrentViewToLibrary={this.switchCurrentViewToLibrary}

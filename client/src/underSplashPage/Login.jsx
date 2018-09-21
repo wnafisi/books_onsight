@@ -37,8 +37,8 @@ class Login extends Component {
         localStorage.removeItem("jwt");
         this.setState({
           name: '',
-          email: ''
-        });
+          email: '',
+        })
     }
     showLogin() {
         if (this.props.isLoggedIn === false) {
@@ -84,9 +84,7 @@ class Login extends Component {
     }
     render() {
         return(
-            <div>
-                {this.showLogin()}
-            </div>
+            this.showLogin()
         )
     }
 }
