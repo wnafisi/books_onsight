@@ -1,7 +1,7 @@
 # Books onSight
 This app allows users to share their personal library with friends, as well as get access to other user's libraries in turn. Beyound requesting books to loan from friends, users can also see what friends are reading, their reviews, and their ratings of specific books.
 
-here's a link to the current app, (currently deployed on Heroku): [Books-onSight](lonely-zoo.surge.sh)
+here's a link to the current app, (deployed on Heroku): lonely-zoo.surge.sh
 
 ## Motivation
 As someone who finds the richness in reading to be the sharing and discussion of ideas that come after the reading of a book, I wanted to create an app that allows not only the exchange of books, but also the exchange of ideas through user reviews and comments.
