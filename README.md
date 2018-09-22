@@ -26,6 +26,7 @@ Built with React on the front-end, and Ruby on Rails in the back-end.
 ## Code Example
 Below is a snippet from './App.jsx':
 
+```
 pickOneBook(id) {
   fetchOneBook(id)
       .then(data => this.setState({ oneBook: data.message }))
@@ -40,6 +41,7 @@ pickOneBook(id) {
        this.showRating()
   } 
 } 
+```
 
 When a user clicks on a book title in 'Our library' page, 'pickOneBook' sets off a series of Api fetches to the back-end server's database that deal with requesting specific information related to an individual book. 'FetchOneBook' and 'fetchOneAuthor' call simple api fetches that return an instance of 'book' or 'author' with the requested id. 'FetchRatingForBook' and 'fetchLoanForBookId' make more complicated fetches that call across, and join multiple tables, to source the correct information, such as loans, reviews, and ratings. Finally, these calls reset various data components within the app's state, as well as the correct domain page components to render the sequestered information.
 
