@@ -6,6 +6,9 @@ here's a link to the current app, (deployed on Heroku): [Books onSight](http://l
 ## Motivation
 As someone who finds the richness in reading to be the sharing and discussion of ideas that come after the reading of a book, I wanted to create an app that allows not only the exchange of books, but also the exchange of ideas through user reviews and comments.
 
+## Contribute
+I'm a beginning developer and am looking to learn as much as I can. That said, feel free to submit issues and enhancement requests!
+
 ## Code style
 This project uses AirBnB Javascript.
 
