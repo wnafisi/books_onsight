@@ -1,7 +1,7 @@
 # Books onSight
 This app allows users to share their personal library with friends, as well as get access to other user's libraries in turn. Beyound requesting books to loan from friends, users can also see what friends are reading, their reviews, and their ratings of specific books.
 
-here's a link to the current app, (currently deployed on Heroku): lonely-zoo.surge.sh
+here's a link to the current app, (currently deployed on Heroku): [Books-onSight](lonely-zoo.surge.sh)
 
 ## Motivation
 As someone who finds the richness in reading to be the sharing and discussion of ideas that come after the reading of a book, I wanted to create an app that allows not only the exchange of books, but also the exchange of ideas through user reviews and comments.
@@ -22,6 +22,7 @@ Built with React on the front-end, and Ruby on Rails in the back-end.
 
 ## Code Example
 Below is a snippet from './App.jsx':
+
 pickOneBook(id) {
   fetchOneBook(id)
       .then(data => this.setState({ oneBook: data.message }))
@@ -36,6 +37,7 @@ pickOneBook(id) {
        this.showRating()
   } 
 } 
+
 When a user clicks on a book title in 'Our library' page, 'pickOneBook' sets off a series of Api fetches to the back-end server's database that deal with requesting specific information related to an individual book. 'FetchOneBook' and 'fetchOneAuthor' call simple api fetches that return an instance of 'book' or 'author' with the requested id. 'FetchRatingForBook' and 'fetchLoanForBookId' make more complicated fetches that call across, and join multiple tables, to source the correct information, such as loans, reviews, and ratings. Finally, these calls reset various data components within the app's state, as well as the correct domain page components to render the sequestered information.
 
 ## How to install?
