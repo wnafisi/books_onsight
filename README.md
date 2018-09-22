@@ -41,14 +41,15 @@ pickOneBook(id) {
 When a user clicks on a book title in 'Our library' page, 'pickOneBook' sets off a series of Api fetches to the back-end server's database that deal with requesting specific information related to an individual book. 'FetchOneBook' and 'fetchOneAuthor' call simple api fetches that return an instance of 'book' or 'author' with the requested id. 'FetchRatingForBook' and 'fetchLoanForBookId' make more complicated fetches that call across, and join multiple tables, to source the correct information, such as loans, reviews, and ratings. Finally, these calls reset various data components within the app's state, as well as the correct domain page components to render the sequestered information.
 
 ## How to install?
-Backend
+### Backend
 * Fork and/or clone this repo
 * Cd into 'backend' and 'gem install rails', if you don't have it already
 * Install 'gems bundle install'
 * Create the needed config, database, and load db/seeds with 'rake setup'
 * Create and seed the database with 'rake db:setup'
 * Finally, type 'rails s' to begin the server
-Frontend
+
+### Frontend
 * Cd into 'client' and type 'yarn install', and then 'yarn start'
 
 ## Credits
