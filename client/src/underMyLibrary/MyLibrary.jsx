@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 //component imports
 import AddBook from '../underAddBook/AddBook';
-import Login from '../underSplashPage/Login';
 import OneMyBook from './OneMyBook';
 import MyLoans from './MyLoans';
 //api call imports
@@ -63,6 +62,8 @@ class MyLibrary extends Component {
     }
     //resets user's books to reflect newly created book
     resetMyBooks(){
+        fetchAuthors()
+        .then(data => this.setState({authors: data.message}))
         fetchMyBooksForUserId(this.props.nameToUserId())
         .then(data => this.setState({myBooks: data.message}))
     }
@@ -146,10 +147,10 @@ class MyLibrary extends Component {
                         <div 
                             onClick={()=>this.toggleIsMyLoans()}
                             className="filterBabyMyLibrary">
-                            Your loans
+                            My loans
                         </div>
                         <div className="filterBabyMyLibrary">
-                            Your reviews
+                            My reviews
                         </div>
                     </div>
                     <div className="title">
@@ -162,14 +163,6 @@ class MyLibrary extends Component {
                         </div>
                             {this.showAddBookOrOneMyBook()}
                     </div>
-                </div>
-                <div className="columnContainerLogin">
-                    <Login 
-                        email={this.props.email}
-                        setUserEmail={this.props.setUserEmail}
-                        isLoggedIn={this.props.isLoggedIn}
-                        switchIsloggedIn={this.props.switchIsloggedIn}
-                    />
                 </div>
             </div>            
         )

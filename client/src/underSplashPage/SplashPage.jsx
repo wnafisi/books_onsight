@@ -1,6 +1,4 @@
 import React from 'react';
-//component imports
-import Login from './Login';
 
 function MyProfile(props) {
     return(
@@ -26,16 +24,8 @@ function MyProfile(props) {
                         </div>
                     </div>
                 </div>
-
-                <Login 
-                    email={props.email}
-                    setUserEmail={props.setUserEmail}
-                    isLoggedIn={props.isLoggedIn}
-                    switchIsloggedIn={props.switchIsloggedIn}
-                />
         </div>
     )
 }
-
 
 export default MyProfile;

@@ -76,8 +76,20 @@ class Register extends Component{
             )
         } else {
             return(
-                <div>
-                    Successful registration, {this.props.email}
+                <div className="addBookForm">
+                    Successful registration, {this.props.email} !
+                    <br></br>
+                    <br></br>
+                    <div 
+                        onClick={()=>this.props.switchCurrentViewToMyLibrary()}
+                        className="registrationButton">
+                        Head to My library and start adding your books
+                    </div>
+                    <div 
+                        onClick={()=>this.props.switchCurrentViewToLibrary()}
+                        className="registrationButton">
+                        Visit the Collective library, make reviews, and check out books
+                    </div>
                 </div>
             )
         }

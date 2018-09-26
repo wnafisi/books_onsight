@@ -32,7 +32,14 @@
   background-size: 100%;
   min-height: 740px;
   padding: 100px 0 0 40px;
-  
+  display: flex;
+  flex-direction: row;
+}
+.container-displayLogin{
+  flex: 1;
+}
+.container-displayEverythingElse{
+  flex: 6;
 }
 
 /* display box for list of books / authors / users */
@@ -255,6 +262,8 @@ flex: 1;
   padding: 16px;
   font-size: 16px;
   cursor: pointer;
+  margin: 2px;
+
 }
 .dropbtn:hover, .dropbtn:focus {
   background-color: #2980B9;
@@ -382,6 +391,21 @@ flex: 1;
   right: 0px;
   min-width: 200px;
 }
+.registrationButton{
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  max-width: 350px;
+  margin: 20px 0 0 0;
+}
+.registrationButton:hover, .registrationButton:focus {
+  background-color: #2980B9;
+}
+
+
+
 /*MY LIBRARY PROFILE PAGE*/
 .columnContainerMyLibrary{
   display: flex;
@@ -426,6 +450,7 @@ flex: 1;
   background-color: #3498DB;
   color: white;
   padding: 16px;
+  margin: 2px;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -433,6 +458,18 @@ flex: 1;
   height: 20px;
 }
 .dropbtnAuthor:hover, .dropbtnAuthor:focus {
+  background-color: #2980B9;
+}
+.dropbtnForBackToMainBookList{
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  margin: 2px;
+  font-size: 16px;
+  cursor: pointer;
+  max-width: 240px;
+}
+.dropbtnForBackToMainBookList:hover, .dropbtnForBackToMainBookList:focus {
   background-color: #2980B9;
 }
 

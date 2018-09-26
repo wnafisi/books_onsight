@@ -18,15 +18,12 @@ function FilterByRating(props){
     } 
     function showDropDown(){
         const starsDown = document.querySelector('.dropdown-content')
-        console.log("1", starsDown)
         starsDown.classList.toggle("show");
-        console.log("2", starsDown)
-
       }
 
     return(
            <div className="dropdown">
-                <button onClick={()=>showDropDown()} className="dropbtn">Filter by rating</button>
+                <div onClick={()=>showDropDown()} className="dropbtn">Filter by rating</div>
                     <div className="dropdown-content">
                         <a onClick={()=>props.filterByStars(1)} >1 star</a>
                         <a onClick={()=>props.filterByStars(2)} >2 stars</a>
@@ -37,8 +34,5 @@ function FilterByRating(props){
             </div>
     )
 }
-
-
-
 
 export default FilterByRating;

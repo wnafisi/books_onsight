@@ -23,6 +23,7 @@ class OurLibrary extends Component {
             showIsFilterByStarsButton: true,
             isFilterByStars: false,
             showBackToMainBookListButton: false,
+            filterNowBackToMainBooksButton: false,
         }
         this.pickOneBook=this.pickOneBook.bind(this);
         this.resetRatingsForBook=this.resetRatingsForBook.bind(this);
@@ -74,6 +75,7 @@ class OurLibrary extends Component {
     //filter by rating, (re-renders oneBook component so it starts clean)
     filterByStars(starNumber){
         this.setState({ isFilterByStars: true, 
+                        filterNowBackToMainBooksButton: true,
                         oneBook: '', 
                         isFilterByAuthors: false })
         fetchSpecificRating(starNumber)
@@ -96,6 +98,26 @@ class OurLibrary extends Component {
                 </div>
             )
         }
+    }
+    //reveals back to main book list button when filter through ratings is happening
+    filterNowBackToBooks(){
+        if(this.state.filterNowBackToMainBooksButton===true) {
+            return(
+                <div className="filterBaby">
+                    <div 
+                        className="dropbtnForBackToMainBookList"
+                        onClick={()=> { this.setState({isFilterByStars: false, 
+                                                     filterNowBackToMainBooksButton: false,
+                                                    oneBook: ''})
+                                        fetchBooks()
+                                        .then(data => this.setState({books: data.message}))
+                                                    }}>
+                        Back to main book catalogue
+                    </div>
+                </div>
+            )
+        }
+
     }
     //resets ratings for book when a new rating is made
     resetRatingsForBook(bookId){
@@ -173,6 +195,7 @@ class OurLibrary extends Component {
         return(
             <div className="columnContainer">
                 <div className="filterBar">
+                    {this.filterNowBackToBooks()}
                     {this.backToMainBookList()}
                     <div className="filterBaby">
                         <div 
@@ -185,7 +208,9 @@ class OurLibrary extends Component {
                                                 isFilterByStars: false,  
                                                 showBackToMainBookListButton: true,
                                                 showIsFilterByStarsButton: false,
-                                                oneBook: '', oneAuthor: ''})
+                                                filterNowBackToMainBooksButton: false,
+                                                oneBook: '', 
+                                                oneAuthor: ''})
                             } else {
                                 this.setState({isFilterByAuthors: false,
                                                 showBackToMainBookListButton: false,
