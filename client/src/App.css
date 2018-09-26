@@ -38,9 +38,10 @@
 .container-displayLogin{
   flex: 2;
   max-width: 240px;
+  display: inline-block;
 }
 .container-displayEverythingElse{
-  flex: 6;
+  flex: 5;
 }
 
 /* display box for list of books / authors / users */
