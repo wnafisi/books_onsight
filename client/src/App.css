@@ -36,7 +36,8 @@
   flex-direction: row;
 }
 .container-displayLogin{
-  flex: 1;
+  flex: 2;
+  max-width: 240px;
 }
 .container-displayEverythingElse{
   flex: 6;
@@ -385,7 +386,7 @@ flex: 1;
 .loginStart{
   background-image: linear-gradient(rgba(52, 152, 219, 0.509), #f06b0600);
   min-height: 600px;
-  display: inline-block;
+  display: absolute;
   padding: 15px;  
   flex: 1;
   right: 0px;
