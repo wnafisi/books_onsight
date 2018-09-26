@@ -38,12 +38,11 @@
 .container-displayLogin{
   flex: 2;
   max-width: 240px;
-  display: block;
-  z-index: 1;
-  float: right;
+  display: inline-block;
 }
 .container-displayEverythingElse{
   flex: 5;
+  
 }
 
 /* display box for list of books / authors / users */
@@ -348,14 +347,14 @@ flex: 1;
   font-size: 2.6rem;
   content: center;
   max-width: 300px;
-  margin: 100px 100px 100px 250px;
+  margin: 100px 100px 100px 200px;
 }
 .welcomeTextSide{
   flex: 1;
   content: center;
   font-size: 2rem;
   max-width: 300px;
-  margin: 70px 300px 50px 50px;
+  margin: 70px 220px 50px 50px;
 }
 .frontPageButtonsContainer{
   display: flex;
@@ -420,7 +419,7 @@ flex: 1;
  flex: 1;
  right: 0px; 
  max-width: 230px; 
-
+ 
 }
 .filterBabyMyLibrary{
   background-color: #3498DB;
