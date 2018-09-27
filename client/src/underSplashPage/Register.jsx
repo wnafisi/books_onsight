@@ -47,7 +47,7 @@ class Register extends Component{
         if(this.props.isLoggedIn === false){
             return (
                 <div className="addBookForm">
-                <p>Register below to gain access to the collective user libraries</p>
+                <p>Register below to gain access to the collective user libraries, add a book, and make reviews</p>
                 <br></br>
                     <form>
                         <label htmlFor="email">Email: </label>
