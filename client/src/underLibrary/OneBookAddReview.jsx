@@ -26,7 +26,7 @@ class OneBookAddReview extends Component {
                 (this.props.resetStateAfterAddedReview(this.props.oneBook.id))
             }) 
         } else {
-            this.setState({isNotLoggedIn: true})
+            this.props.switchCurrentViewToRegister()
         }      
     }
 

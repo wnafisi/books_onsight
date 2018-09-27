@@ -115,6 +115,7 @@ class OneBook extends Component {
                         resetStateAfterAddedReview={this.resetStateAfterAddedReview}
                         nameToUserId={this.props.nameToUserId}
                         removeAddReviewForm={this.removeAddReviewForm}
+                        switchCurrentViewToRegister={this.props.switchCurrentViewToRegister}
                     />
                     <OneBookReview 
                         oneBook={this.props.oneBook}

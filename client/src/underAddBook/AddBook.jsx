@@ -139,11 +139,7 @@ class AddBook extends Component {
     }
     showNotloggedIn(){
         if(this.state.isNotLoggedIn === true) {
-            return(
-                <div>
-                    Sorry, you must be a registered user or logged in to add a book.
-                </div>
-            )
+            this.props.switchCurrentViewToRegister()
         }
     }
 

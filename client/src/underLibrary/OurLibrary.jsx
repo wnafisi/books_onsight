@@ -185,6 +185,7 @@ class OurLibrary extends Component {
                             pickOneBook={this.pickOneBook}
                             resetRatingsForBook={this.resetRatingsForBook}
                             resetLoansForBook={this.resetLoansForBook}
+                            switchCurrentViewToRegister={this.props.switchCurrentViewToRegister}
                         />
                 </div>
             )

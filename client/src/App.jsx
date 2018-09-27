@@ -82,11 +82,13 @@ class App extends Component {
                 userIdToName={this.userIdToName}
                 nameToUserId={this.nameToUserId}
                 switchCurrentViewToLibrary={this.switchCurrentViewToLibrary}
+                switchCurrentViewToRegister={this.switchCurrentViewToRegister}
                 />;
       case 'Collective Library':
         return <OurLibrary 
                   userIdToName={this.userIdToName}
                   nameToUserId={this.nameToUserId}
+                  switchCurrentViewToRegister={this.switchCurrentViewToRegister}
                 />;
       case 'Users':
         return <Users
